@@ -1,0 +1,17 @@
+# www.robotstxt.org/
+# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
+# robots.txt for DLC
+
+User-agent: *
+Allow: /
+Disallow: /?controller=admin
+Disallow: /?controller=admin*
+Disallow: /index.php?controller=admin
+Disallow: /index.php?controller=admin*
+Disallow: /admin
+Disallow: /admin*
+Disallow: /admin/
+Disallow: /admin/*
+
+User-agent: Googlebot-Image
+Disallow: /

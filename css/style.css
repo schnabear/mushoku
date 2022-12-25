@@ -1,0 +1,1797 @@
+@charset "utf-8";
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: #0a0a0a;
+	color: #ffffff;
+	font-size: 16px;
+	font-family: "Meiryo", "Helvetica Neue", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+}
+
+input, textarea, select {
+	font-family: "Meiryo", "Helvetica Neue", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	/*outline: none;*/
+}
+
+select {
+	border: 1px solid #c0c0c0;
+	padding: 1px;
+}
+
+	select option {
+		border-bottom: 1px dotted #888;
+	}
+
+a:active, a:link, a:visited {
+	color: #5050ff;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	color: #2020ff;
+	text-decoration: underline;
+}
+
+/*::selection {
+	background-color: #818181;
+	color: #ffffff;
+}*/
+
+.clear {
+	clear: both;
+}
+
+.right {
+	float: right;
+}
+
+.hide {
+	display: none;
+}
+
+.transparent {
+	opacity: 0.8;
+}
+
+.hideflow {
+	overflow: hidden;
+}
+
+.fullsolute {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+div#body {
+	width: 620px;
+	margin: 0 auto;
+}
+
+div.container {
+	background: #efefef;
+	padding: 20px;
+	color: #0a0a0a;
+	font-size: 15px;
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	-webkit-border-bottom-right-radius: 15px;
+	-webkit-border-bottom-left-radius: 15px;
+	-moz-border-radius-bottomright: 15px;
+	-moz-border-radius-bottomleft: 15px;
+}
+
+	div.container h2 {
+		text-align: center;
+		font-size: 20px;
+	}
+
+	div.container table {
+		margin: 0 auto 5px;
+	}
+
+	div.container table td {
+		padding: 0 6px;
+	}
+
+.button {
+	position: relative;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+	border-width: 1px 0;
+	border-color: #e6e6e6 transparent #c9c9c9;
+	border-style: solid;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	padding: 2px 20px;
+	background: #dfdfdf;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+	cursor: pointer;
+}
+
+	.button:active {
+		top: 1px;
+	}
+
+a.control, a.control:link, a.control:visited {
+	position: relative;
+	text-align: center;
+	font-size: 13px;
+	padding: 5px 10px;
+	margin: 20px 0 0;
+	border: 1px solid #bbbbbb;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: #f2f2f2;
+	color: #353535;
+	display: block;
+}
+
+	a.control:hover, a.control:focus {
+		border-color: #999;
+		color: #555;
+		text-decoration: none;
+	}
+
+	a.control:active {
+		top: 1px;
+	}
+
+div#pagetop {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 100;
+}
+
+	div#pagetop img {
+		border: 0;
+	}
+
+div#whisper_box {
+	position: fixed;
+	top: 140px;
+	left: 0;
+	width: 715px;
+	height: 500px;
+	background: transparent url('whisper_bg.png') repeat;
+	border-width: 3px 3px 25px 3px;
+	border-color: rgba(150, 150, 150, 0.75);
+	border-style: solid;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	z-index: 10;
+	display: none;
+}
+
+div.message_box {
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #efefef;
+	padding: 5px 0 0 0;
+	color: #0a0a0a;
+	z-index: 5;
+}
+
+	div.message_box h2, div.whisper_message_box h2 {
+		text-align: center;
+		font-size: 13px;
+		float: left;
+	}
+
+div.whisper_message_box {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 5px 0 0 0;
+	z-index: 20;
+	background: #939393;
+	border: transparent;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-topright: 5px;
+	-moz-border-radius-topleft: 5px;
+	opacity: 0.75;
+	-moz-opacity: 0.75;
+	filter: alpha(opacity=75);
+}
+
+	div.whisper_message_box h2 {
+		color: #ffffff;
+	}
+
+div.message_box_inner, div.whisper_message_box_inner {
+	/*position: relative;*/
+	width: 590px;
+	margin: 0 auto;
+	/*left: 50%;*/
+	/*margin-left: -290px;*/
+}
+
+ul.menu {
+	clear: both;
+	display: block;
+	float: right;
+	height: 15px;
+	list-style: none;
+	line-height: 15px;
+}
+
+	ul.menu li {
+		display: block;
+		float: left;
+		margin: 0 0 0 10px;
+		cursor: pointer;
+	}
+
+	ul.menu li input {
+		display: block;
+		font-size: 10px;
+		height: 15px;
+		line-height: 10px;
+		cursor: pointer;
+		border: 1px gray solid;
+		padding: 0 5px;
+	}
+
+	ul.menu li.droplist select {
+		height: 16px;
+		min-width: 150px;
+		border: 0;
+		font-size: 9px;
+	}
+
+	ul.menu li.setting,
+	ul.menu li.sound,
+	ul.menu li.member,
+	ul.menu li.animation,
+	ul.menu li.refresh,
+	ul.menu li.whisper,
+	ul.menu li.lock,
+	ul.menu li.mention,
+	ul.menu li.invite,
+	ul.menu li.notification,
+	ul.menu li.chatlog {
+		width: 15px;
+		display: none;
+	}
+
+	ul.menu li.setting {
+		background: transparent url('setting.png') left top no-repeat;
+	}
+
+	ul.menu li.sound_on {
+		background: transparent url('sound_on.png') left top no-repeat;
+	}
+
+	ul.menu li.sound_off {
+		background: transparent url('sound_off.png') left top no-repeat;
+	}
+
+	ul.menu li.member_on {
+		background: transparent url('member_on.png') left top no-repeat;
+	}
+
+	ul.menu li.member_off {
+		background: transparent url('member_off.png') left top no-repeat;
+	}
+
+	ul.menu li.animation_on {
+		background: transparent url('animation_on.png') left top no-repeat;
+	}
+
+	ul.menu li.animation_off {
+		background: transparent url('animation_off.png') left top no-repeat;
+	}
+
+	ul.menu li.refresh {
+		background: transparent url('refresh.png') left top no-repeat;
+	}
+
+	ul.menu li.whisper_on {
+		background: transparent url('whisper_on.png') left top no-repeat;
+	}
+
+	ul.menu li.whisper_off {
+		background: transparent url('whisper_off.png') left top no-repeat;
+	}
+
+	ul.menu li.whisper_notify {
+		background: transparent url('whisper_notify.png') left top no-repeat;
+	}
+
+	ul.menu li.lock_on {
+		background: transparent url('lock_on.png') left top no-repeat;
+	}
+
+	ul.menu li.lock_off {
+		background: transparent url('lock_off.png') left top no-repeat;
+	}
+
+	ul.menu li.mention_on {
+		background: transparent url('mention_on.png') left top no-repeat;
+	}
+
+	ul.menu li.mention_off {
+		background: transparent url('mention_off.png') left top no-repeat;
+	}
+
+	ul.menu li.invite_on {
+		background: transparent url('invite_on.png') left top no-repeat;
+	}
+
+	ul.menu li.invite_off {
+		background: transparent url('invite_off.png') left top no-repeat;
+	}
+
+	ul.menu li.notification_on {
+		background: transparent url('notification_on.png') left top no-repeat;
+	}
+
+	ul.menu li.notification_off {
+		background: transparent url('notification_off.png') left top no-repeat;
+	}
+
+	ul.menu li.chatlog {
+		background: transparent url('chatlog.png') left top no-repeat;
+	}
+
+#setting_pannel {
+	clear: both;
+	padding: 20px 0;
+}
+
+	#setting_pannel .button {
+		/*padding: 0 8px;*/
+		padding: 1px 6px;
+		margin: 0 2px;
+		text-shadow: none;
+	}
+
+	/*#setting_pannel .right.button {
+		margin-right: 4px;
+	}*/
+
+	#setting_pannel hr {
+		margin: 2px 0 0;
+	}
+
+	#setting_pannel ul#user_list {
+		list-style: none;
+	}
+
+		#setting_pannel ul#user_list li {
+			min-height: 20px;
+			width: 80px;
+			padding-top: 60px;
+			text-align: center;
+			display: block;
+			float: left;
+			line-height: 20px;
+			border: 2px solid transparent;
+			margin: 10px;
+			/*overflow: hidden;*/
+			/*white-space: nowrap;*/
+			/*text-overflow: ellipsis;*/
+			white-space: pre-line;
+			word-wrap: break-word;
+		}
+
+		#setting_pannel ul#user_list li.select {
+			border: 2px solid #ff6600;
+		}
+
+div.message_area {
+	clear: both;
+	position: relative;
+	width: 100%;
+}
+
+#message, #whisper {
+	/*position: relative;*/
+	text-align: center;
+}
+
+	#message textarea, #whisper textarea {
+		clear: both;
+		display: block;
+		width: 470px; /* 410px */
+		height: 3em;
+		font-size: 16px;
+		letter-spacing: 1px;
+		padding: 10px;
+		margin: 0 auto;
+		overflow-y: hidden;
+		resize: none;
+		outline: none;
+	}
+
+	#message textarea {
+		display: inline;
+		clear: none;
+		vertical-align: top;
+		border: 2px #5b5b5b solid;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		/*margin: 0 0 0 86px; /* 0 0 0 100px */
+	}
+
+	#whisper textarea {
+		color: #ffffff;
+		background: #3c3c3c;
+		border: 2px #f3f3f3 solid;
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-webkit-border-radius: 10px;
+	}
+
+	#message div.user_profile {
+		float: left;
+		margin: 5px auto;
+		font-size: 15px;
+	}
+
+	#message div.user_profile img {
+		vertical-align: top;
+	}
+
+	#message div.submit input, #whisper div.submit input {
+		display:block;
+		border: 0;
+		margin: 5px auto;
+		font-size: 12px;
+		font-family: "Meiryo", "Helvetica Neue", "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+		font-weight: bold;
+	}
+
+	#message div.submit input {
+		display: inline;
+		height: 25px;
+		width: 200px;
+		color: #201e1a;
+		background: transparent url('submit.png') 0px 0px no-repeat;
+	}
+
+	#whisper div.submit input {
+		height: 25px;
+		width: 120px;
+		color: #f9f9f9;
+		background: transparent url('submit_whisper.png') 0px 0px no-repeat;
+	}
+
+	#message div.submit input:active {
+		background: transparent url('submit.png') 0px 1px no-repeat;
+	}
+
+	#whisper div.submit input:active {
+		background: transparent url('submit_whisper.png') 0px 1px no-repeat;
+	}
+
+#talks {
+	margin-top: 150px;
+	_margin-top: 15px;
+	font-weight: 500;
+}
+
+#murmurs {
+	/*overflow-x: auto;*/
+	overflow-y: hidden; /* Ohhpera */
+	font-weight: 500;
+	margin: 0 auto;
+	width: 620px;
+}
+
+#talks .mention, #murmurs .mention {
+	-moz-box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+	-webkit-box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+	box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#ffffff')";
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=135, Color='#ffffff');
+	text-shadow: 0 0 5px #ffffff;
+}
+
+div#talks.logs {
+	margin: 20px auto 0;
+}
+
+	#talks div.system, #murmurs div.system {
+		margin: 10px 0 10px 20px;
+		letter-spacing: 3px;
+		clear: left;
+		font-size: 15px;
+	}
+	
+	#talks dl.talk, #murmurs dl.talk {
+		clear: both;
+		min-height: 80px;
+		margin-top: 10px;
+	}
+	
+		#talks dl.talk dt, #murmurs dl.talk dt {
+			min-height: 20px;
+			width: 90px;
+			padding-top: 58px;
+			padding-bottom: 10px;
+			text-align: center;
+			display: block;
+			line-height: 20px;
+			float: left;
+			white-space: pre-line;
+			word-wrap: break-word;
+		}
+
+		#talks dl.talk dt.select, #murmurs dl.talk dt.select {
+			border: 2px solid #ff6600;
+		}
+
+		#talks dl.talk dd, #murmurs dl.talk dd {
+			display: inline-block;
+			max-width: 510px;
+		}
+
+			#talks dl.talk dd div.bubble p.body {
+				float: left;
+				clear: left;
+				padding: 15px 20px;
+				border-radius: 13px;
+				border: 4px #fff solid;
+				-moz-border-radius: 13px;
+				-webkit-border-radius: 13px;
+				background: #000;
+				font: 1em "Meiryo", sans-serif;
+				letter-spacing: 3px;
+				color: #ffffff;
+				-position: relative;
+				max-width: 460px; /* 90% */
+				/*white-space: pre-wrap;*/
+				/*white-space: -moz-pre-wrap;*/
+				/*white-space: -pre-wrap;*/
+				/*white-space: -o-pre-wrap;*/
+				word-wrap: break-word;
+			}
+			
+			#talks dl.setton dt {
+				background: transparent url('icon/setton.png') no-repeat center top;
+			}
+			
+			#talks dl.setton dd div.bubble p.body {
+				background: transparent url('bubble/gray.png') repeat-x left center;
+			}
+			
+			#talks dl.tanaka dt {
+				background: transparent url('icon/tanaka.png') no-repeat center top;
+			}
+			
+			#talks dl.tanaka dd div.bubble p.body {
+				background: transparent url('bubble/blue.png') repeat-x left center;
+			}
+			
+			#talks dl.kanra dt {
+				background: transparent url('icon/kanra.png') no-repeat center top;
+			}
+			
+			#talks dl.kanra dd div.bubble p.body {
+				background: transparent url('bubble/orange.png') repeat-x left center;
+			}
+			
+			#talks dl.zaika dt {
+				background: transparent url('icon/zaika.png') no-repeat center top;
+			}
+			
+			#talks dl.zaika dd div.bubble p.body {
+				background: transparent url('bubble/red.png') repeat-x left center;
+			}
+			
+			#talks dl.zawa dt {
+				background: transparent url('icon/zawa.png') no-repeat center top;
+			}
+			
+			#talks dl.zawa dd div.bubble p.body {
+				background: transparent url('bubble/green.png') repeat-x left center;
+			}
+			
+			#talks dl.gg dt {
+				background: transparent url('icon/gg.png') no-repeat center top;
+			}
+			
+			#talks dl.gg dd div.bubble p.body {
+				background: transparent url('bubble/pink.png') repeat-x left center;
+			}
+			
+			#talks dl.admin dt {
+				background: transparent url('icon/admin.png') no-repeat center top;
+			}
+			
+			#talks dl.admin dd div.bubble p.body {
+				background: transparent url('bubble/admin.png') repeat-x left center;
+			}
+			
+			#talks dl.bakyura dt {
+				background: transparent url('icon/bakyura.png') no-repeat center top;
+			}
+			
+			#talks dl.bakyura dd div.bubble p.body {
+				background: transparent url('bubble/light_green.png') repeat-x left center;
+			}
+			
+			#talks dl.mudgreen dt {
+				background: transparent url('icon/mudgreen.png') no-repeat center top;
+			}
+			
+			#talks dl.mudgreen dd div.bubble p.body {
+				background: transparent url('bubble/mud_green.png') repeat-x left center;
+			}
+			
+			#talks dl.bh dt {
+				background: transparent url('icon/bh.png') no-repeat center top;
+			}
+			
+			#talks dl.bh dd div.bubble p.body {
+				background: transparent url('bubble/gray.png') repeat-x left center;
+			}
+			
+			#talks dl.lolita dt {
+				background: transparent url('icon/lolita.png') no-repeat center top;
+			}
+			
+			#talks dl.lolita dd div.bubble p.body {
+				background: transparent url('bubble/strawberry.png') repeat-x left center;
+			}
+			
+			#talks dl.sizuo dt {
+				background: transparent url('icon/sizuo.png') no-repeat center top;
+			}
+			
+			#talks dl.sizuo dd div.bubble p.body {
+				background: transparent url('bubble/gray.png') repeat-x left center;
+			}
+			
+			#talks dl.lady dt {
+				background: transparent url('icon/lady.png') no-repeat center top;
+			}
+			
+			#talks dl.lady dd div.bubble p.body {
+				background: transparent url('bubble/carrot.png') repeat-x left center;
+			}
+			
+			#talks dl.koukin dt {
+				background: transparent url('icon/koukin.png') no-repeat center top;
+			}
+			
+			#talks dl.koukin dd div.bubble p.body {
+				background: transparent url('bubble/yellow.png') repeat-x left center;
+			}
+			
+			#talks dl.woman dt {
+				background: transparent url('icon/woman.png') no-repeat center top;
+			}
+			
+			#talks dl.woman dd div.bubble p.body {
+				background: transparent url('bubble/carrot.png') repeat-x left center;
+			}
+			
+			#talks dl.izaya dt {
+				background: transparent url('icon/izaya.png') no-repeat center top;
+			}
+			
+			#talks dl.izaya dd div.bubble p.body {
+				background: transparent url('bubble/brown.png') repeat-x left center;
+			}
+			
+			#talks dl.chinese dt {
+				background: transparent url('icon/chinese.png') no-repeat center top;
+			}
+			
+			#talks dl.chinese dd div.bubble p.body {
+				background: transparent url('bubble/purple.png') repeat-x left center;
+			}
+			
+			#talks dl.simon dt {
+				background: transparent url('icon/simon.png') no-repeat center top;
+			}
+			
+			#talks dl.simon dd div.bubble p.body {
+				background: transparent url('bubble/cobalt.png') repeat-x left center;
+			}
+			
+			#talks dl.shinra dt {
+				background: transparent url('icon/shinra.png') no-repeat center top;
+			}
+			
+			#talks dl.shinra dd div.bubble p.body {
+				background: transparent url('bubble/gray.png') repeat-x left center;
+			}
+			
+			#talks dl.hakumen dt {
+				background: transparent url('icon/hakumen.png') no-repeat center top;
+			}
+			
+			#talks dl.hakumen dd div.bubble p.body {
+				background: transparent url('bubble/gray.png') repeat-x left center;
+			}
+			
+			#talks dl.gyosha dt {
+				background: transparent url('icon/gyosha.png') no-repeat center top;
+			}
+			
+			#talks dl.gyosha dd div.bubble p.body {
+				background: transparent url('bubble/vodka.png') repeat-x left center;
+			}
+			
+			/*#talks dl.darkblue dt {
+				background: transparent url('icon/darkblue.png') no-repeat center top;
+			}
+			
+			#talks dl.darkblue dd div.bubble p.body {
+				background: transparent url('bubble/dark_blue.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.keroro dt {
+				background: transparent url('icon/keroro.png') no-repeat center top;
+			}
+			
+			#talks dl.keroro dd div.bubble p.body {
+				background: transparent url('bubble/keroro.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.shizuo dt {
+				background: transparent url('icon/shizuo.png') no-repeat center top;
+			}
+			
+			#talks dl.shizuo dd div.bubble p.body {
+				background: transparent url('bubble/shizuo.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.ciel dt {
+				background: transparent url('icon/ciel.png') no-repeat center top;
+			}
+			
+			#talks dl.ciel dd div.bubble p.body {
+				background: transparent url('bubble/ciel.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.chii dt {
+				background: transparent url('icon/chii.png') no-repeat center top;
+			}
+			
+			#talks dl.chii dd div.bubble p.body {
+				background: transparent url('bubble/chii.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.selty dt {
+				background: transparent url('icon/selty.png') no-repeat center top;
+			}
+			
+			#talks dl.selty dd div.bubble p.body {
+				background: transparent url('bubble/selty.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.mika dt {
+				background: transparent url('icon/mika.png') no-repeat center top;
+			}
+			
+			#talks dl.mika dd div.bubble p.body {
+				background: transparent url('bubble/mika.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.shingen dt {
+				background: transparent url('icon/shingen.png') no-repeat center top;
+			}
+			
+			#talks dl.shingen dd div.bubble p.body {
+				background: transparent url('bubble/shingen.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.hana dt {
+				background: transparent url('icon/hana.png') no-repeat center top;
+			}
+			
+			#talks dl.hana dd div.bubble p.body {
+				background: transparent url('bubble/hanao.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.bepo dt {
+				background: transparent url('icon/bepo.png') no-repeat center top;
+			}
+			
+			#talks dl.bepo dd div.bubble p.body {
+				background: transparent url('bubble/bepo.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.law dt {
+				background: transparent url('icon/law.png') no-repeat center top;
+			}
+			
+			#talks dl.law dd div.bubble p.body {
+				background: transparent url('bubble/law.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.nozomu dt {
+				background: transparent url('icon/nozomu.png') no-repeat center top;
+			}
+			
+			#talks dl.nozomu dd div.bubble p.body {
+				background: transparent url('bubble/nozomu.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.tero dt {
+				background: transparent url('icon/tero.png') no-repeat center top;
+			}
+			
+			#talks dl.tero dd div.bubble p.body {
+				background: transparent url('bubble/tero.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.meme dt {
+				background: transparent url('icon/meme.png') no-repeat center top;
+			}
+			
+			#talks dl.meme dd div.bubble p.body {
+				background: transparent url('bubble/meme.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.hoshi dt {
+				background: transparent url('icon/hoshi.png') no-repeat center top;
+			}
+			
+			#talks dl.hoshi dd div.bubble p.body {
+				background: transparent url('bubble/hoshi.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.soncho dt {
+				background: transparent url('icon/soncho.png') no-repeat center top;
+			}
+			
+			#talks dl.soncho dd div.bubble p.body {
+				background: transparent url('bubble/soncho.png') repeat-x left center;
+			}*/
+			
+			/*#talks dl.dango dt {
+				background: transparent url('icon/dango.png') no-repeat center top;
+			}
+			
+			#talks dl.dango dd div.bubble p.body {
+				background: transparent url('bubble/dango.png') repeat-x left center;
+			}*/
+			
+			#murmurs dl.talk dd div.bubble p.body {
+				color: #000;
+				float: left;
+				clear: left;
+				padding: 15px 20px;
+				border-radius: 13px;
+				border: 4px #b6b6b6 solid;
+				-moz-border-radius: 13px;
+				-webkit-border-radius: 13px;
+				font: 1em "Meiryo", sans-serif;
+				letter-spacing: 3px;
+				position: relative;
+				-position: relative;
+				background: #e1e1e1;
+				max-width: 460px; /* 90% */
+				/*white-space: pre-wrap;*/
+				/*white-space: -moz-pre-wrap;*/
+				/*white-space: -pre-wrap;*/
+				/*white-space: -o-pre-wrap;*/
+				word-wrap: break-word;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body:before, #murmurs dl.talk dd div.bubble p.body:after {
+				content: " ";
+				position: absolute;
+				width: 0;
+				display: block;
+				white-space: nowrap;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body.middle:before {
+				top: 18px;
+				left: -22px;
+				border-width: 9px 22px 9px 0;
+				border-style: solid;
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body.middle:after {
+				top: 23px;
+				left: -14px;
+				border-width: 4px 14px 4px 0;
+				border-style: solid;
+				border-color: transparent #e1e1e1;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body.top:before {
+				top: 18px;
+				left: -22px;
+				border-width: 17px 22px 0 0;
+				border-style: solid;
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body.top:after {
+				top: 23px;
+				left: -11px;
+				border-width: 8px 11px 0 0;
+				border-style: solid;
+				border-color: transparent #e1e1e1;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body.bottom:before {
+				top: 19px;
+				left: -22px;
+				border-width: 0 22px 17px 0;
+				border-style: solid;
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.talk dd div.bubble p.body.bottom:after {
+				top: 23px;
+				left: -11px;
+				border-width: 0 11px 8px 0;
+				border-style: solid;
+				border-color: transparent #e1e1e1;
+			}
+			
+			#murmurs dl.zaika dd div.bubble p.body {
+				border-color: #942020;
+			}
+			
+			#murmurs dl.zaika dt {
+				background: transparent url('whisper/zaika.png') no-repeat center top;
+			}
+			
+			#murmurs dl.zaika dd div.bubble p.body.middle:before, #murmurs dl.zaika dd div.bubble p.body.top:before, #murmurs dl.zaika dd div.bubble p.body.bottom:before {
+				border-color: transparent #942020;
+			}
+			
+			#murmurs dl.setton dd div.bubble p.body {
+				border-color: #b6b6b6;
+			}
+			
+			#murmurs dl.setton dt {
+				background: transparent url('whisper/setton.png') no-repeat center top;
+			}
+			
+			#murmurs dl.setton dd div.bubble p.body.middle:before, #murmurs dl.setton dd div.bubble p.body.top:before, #murmurs dl.setton dd div.bubble p.body.bottom:before {
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.tanaka dd div.bubble p.body {
+				border-color: #93d1fb;
+			}
+			
+			#murmurs dl.tanaka dt {
+				background: transparent url('whisper/tanaka.png') no-repeat center top;
+			}
+			
+			#murmurs dl.tanaka dd div.bubble p.body.middle:before, #murmurs dl.tanaka dd div.bubble p.body.top:before, #murmurs dl.tanaka dd div.bubble p.body.bottom:before {
+				border-color: transparent #93d1fb;
+			}
+			
+			#murmurs dl.kanra dd div.bubble p.body {
+				border-color: #f2a532;
+			}
+			
+			#murmurs dl.kanra dt {
+				background: transparent url('whisper/kanra.png') no-repeat center top;
+			}
+			
+			#murmurs dl.kanra dd div.bubble p.body.middle:before, #murmurs dl.kanra dd div.bubble p.body.top:before, #murmurs dl.kanra dd div.bubble p.body.bottom:before {
+				border-color: transparent #f2a532;
+			}
+			
+			#murmurs dl.zawa dd div.bubble p.body {
+				border-color: #5c7955;
+			}
+			
+			#murmurs dl.zawa dt {
+				background: transparent url('whisper/zawa.png') no-repeat center top;
+			}
+			
+			#murmurs dl.zawa dd div.bubble p.body.middle:before, #murmurs dl.zawa dd div.bubble p.body.top:before, #murmurs dl.zawa dd div.bubble p.body.bottom:before {
+				border-color: transparent #5c7955;
+			}
+			
+			#murmurs dl.gg dd div.bubble p.body {
+				border-color: #db67a2;
+			}
+			
+			#murmurs dl.gg dt {
+				background: transparent url('whisper/gg.png') no-repeat center top;
+			}
+			
+			#murmurs dl.gg dd div.bubble p.body.middle:before, #murmurs dl.gg dd div.bubble p.body.top:before, #murmurs dl.gg dd div.bubble p.body.bottom:before {
+				border-color: transparent #db67a2;
+			}
+			
+			#murmurs dl.admin dd div.bubble p.body {
+				border-color: #de8434;
+			}
+			
+			#murmurs dl.admin dt {
+				background: transparent url('whisper/admin.png') no-repeat center top;
+			}
+			
+			#murmurs dl.admin dd div.bubble p.body.middle:before, #murmurs dl.admin dd div.bubble p.body.top:before, #murmurs dl.admin dd div.bubble p.body.bottom:before {
+				border-color: transparent #de8434;
+			}
+			
+			#murmurs dl.bakyura dd div.bubble p.body {
+				border-color: #94e639;
+			}
+			
+			#murmurs dl.bakyura dt {
+				background: transparent url('whisper/bakyura.png') no-repeat center top;
+			}
+			
+			#murmurs dl.bakyura dd div.bubble p.body.middle:before, #murmurs dl.bakyura dd div.bubble p.body.top:before, #murmurs dl.bakyura dd div.bubble p.body.bottom:before {
+				border-color: transparent #94e639;
+			}
+			
+			#murmurs dl.mudgreen dd div.bubble p.body {
+				border-color: #78733a;
+			}
+			
+			#murmurs dl.mudgreen dt {
+				background: transparent url('whisper/mudgreen.png') no-repeat center top;
+			}
+			
+			#murmurs dl.mudgreen dd div.bubble p.body.middle:before, #murmurs dl.mudgreen dd div.bubble p.body.top:before, #murmurs dl.mudgreen dd div.bubble p.body.bottom:before {
+				border-color: transparent #78733a;
+			}
+			
+			#murmurs dl.bh dd div.bubble p.body {
+				border-color: #b6b6b6;
+			}
+			
+			#murmurs dl.bh dt {
+				background: transparent url('whisper/bh.png') no-repeat center top;
+			}
+			
+			#murmurs dl.bh dd div.bubble p.body.middle:before, #murmurs dl.bh dd div.bubble p.body.top:before, #murmurs dl.bh dd div.bubble p.body.bottom:before {
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.lolita dd div.bubble p.body {
+				border-color: #d20051;
+			}
+			
+			#murmurs dl.lolita dt {
+				background: transparent url('whisper/lolita.png') no-repeat center top;
+			}
+			
+			#murmurs dl.lolita dd div.bubble p.body.middle:before, #murmurs dl.lolita dd div.bubble p.body.top:before, #murmurs dl.lolita dd div.bubble p.body.bottom:before {
+				border-color: transparent #d20051;
+			}
+			
+			#murmurs dl.sizuo dd div.bubble p.body {
+				border-color: #b6b6b6;
+			}
+			
+			#murmurs dl.sizuo dt {
+				background: transparent url('whisper/sizuo.png') no-repeat center top;
+			}
+			
+			#murmurs dl.sizuo dd div.bubble p.body.middle:before, #murmurs dl.sizuo dd div.bubble p.body.top:before, #murmurs dl.sizuo dd div.bubble p.body.bottom:before {
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.lady dd div.bubble p.body {
+				border-color: #fc4e32;
+			}
+			
+			#murmurs dl.lady dt {
+				background: transparent url('whisper/lady.png') no-repeat center top;
+			}
+			
+			#murmurs dl.lady dd div.bubble p.body.middle:before, #murmurs dl.lady dd div.bubble p.body.top:before, #murmurs dl.lady dd div.bubble p.body.bottom:before {
+				border-color: transparent #fc4e32;
+			}
+			
+			#murmurs dl.koukin dd div.bubble p.body {
+				border-color: #fed900;
+			}
+			
+			#murmurs dl.koukin dt {
+				background: transparent url('whisper/koukin.png') no-repeat center top;
+			}
+			
+			#murmurs dl.koukin dd div.bubble p.body.middle:before, #murmurs dl.koukin dd div.bubble p.body.top:before, #murmurs dl.koukin dd div.bubble p.body.bottom:before {
+				border-color: transparent #fed900;
+			}
+			
+			#murmurs dl.woman dd div.bubble p.body {
+				border-color: #e46452;
+			}
+			
+			#murmurs dl.woman dt {
+				background: transparent url('whisper/woman.png') no-repeat center top;
+			}
+			
+			#murmurs dl.woman dd div.bubble p.body.middle:before, #murmurs dl.woman dd div.bubble p.body.top:before, #murmurs dl.woman dd div.bubble p.body.bottom:before {
+				border-color: transparent #e46452;
+			}
+			
+			#murmurs dl.izaya dd div.bubble p.body {
+				border-color: #daa977;
+			}
+			
+			#murmurs dl.izaya dt {
+				background: transparent url('whisper/izaya.png') no-repeat center top;
+			}
+			
+			#murmurs dl.izaya dd div.bubble p.body.middle:before, #murmurs dl.izaya dd div.bubble p.body.top:before, #murmurs dl.izaya dd div.bubble p.body.bottom:before {
+				border-color: transparent #daa977;
+			}
+			
+			#murmurs dl.chinese dd div.bubble p.body {
+				border-color: #ab5da1;
+			}
+			
+			#murmurs dl.chinese dt {
+				background: transparent url('whisper/chinese.png') no-repeat center top;
+			}
+			
+			#murmurs dl.chinese dd div.bubble p.body.middle:before, #murmurs dl.chinese dd div.bubble p.body.top:before, #murmurs dl.chinese dd div.bubble p.body.bottom:before {
+				border-color: transparent #ab5da1;
+			}
+			
+			#murmurs dl.simon dd div.bubble p.body {
+				border-color: #2c5ca9;
+			}
+			
+			#murmurs dl.simon dt {
+				background: transparent url('whisper/simon.png') no-repeat center top;
+			}
+			
+			#murmurs dl.simon dd div.bubble p.body.middle:before, #murmurs dl.simon dd div.bubble p.body.top:before, #murmurs dl.simon dd div.bubble p.body.bottom:before {
+				border-color: transparent #2c5ca9;
+			}
+			
+			#murmurs dl.shinra dd div.bubble p.body {
+				border-color: #9fa0a0;
+			}
+			
+			#murmurs dl.shinra dt {
+				background: transparent url('whisper/shinra.png') no-repeat center top;
+			}
+			
+			#murmurs dl.shinra dd div.bubble p.body.middle:before, #murmurs dl.shinra dd div.bubble p.body.top:before, #murmurs dl.shinra dd div.bubble p.body.bottom:before {
+				border-color: transparent #9fa0a0;
+			}
+			
+			#murmurs dl.hakumen dd div.bubble p.body {
+				border-color: #b6b6b6;
+			}
+			
+			#murmurs dl.hakumen dt {
+				background: transparent url('whisper/hakumen.png') no-repeat center top;
+			}
+			
+			#murmurs dl.hakumen dd div.bubble p.body.middle:before, #murmurs dl.hakumen dd div.bubble p.body.top:before, #murmurs dl.hakumen dd div.bubble p.body.bottom:before {
+				border-color: transparent #b6b6b6;
+			}
+			
+			#murmurs dl.gyosha dd div.bubble p.body {
+				border-color: #c8bfe7;
+			}
+			
+			#murmurs dl.gyosha dt {
+				background: transparent url('whisper/gyosha.png') no-repeat center top;
+			}
+			
+			#murmurs dl.gyosha dd div.bubble p.body.middle:before, #murmurs dl.gyosha dd div.bubble p.body.top:before, #murmurs dl.gyosha dd div.bubble p.body.bottom:before {
+				border-color: transparent #c8bfe7;
+			}
+			
+			/*#murmurs dl.darkblue dd div.bubble p.body {
+				border-color: #3c629b;
+			}
+			
+			#murmurs dl.darkblue dt {
+				background: transparent url('whisper/darkblue.png') no-repeat center top;
+			}
+			
+			#murmurs dl.darkblue dd div.bubble p.body.middle:before, #murmurs dl.darkblue dd div.bubble p.body.top:before, #murmurs dl.darkblue dd div.bubble p.body.bottom:before {
+				border-color: transparent #3c629b;
+			}*/
+			
+			/*#murmurs dl.keroro dd div.bubble p.body {
+				border-color: #7cc576;
+			}
+			
+			#murmurs dl.keroro dt {
+				background: transparent url('whisper/keroro.png') no-repeat center top;
+			}
+			
+			#murmurs dl.keroro dd div.bubble p.body.middle:before, #murmurs dl.keroro dd div.bubble p.body.top:before, #murmurs dl.keroro dd div.bubble p.body.bottom:before {
+				border-color: transparent #7cc576;
+			}*/
+			
+			/*#murmurs dl.shizuo dd div.bubble p.body {
+				border-color: #292841;
+			}
+			
+			#murmurs dl.shizuo dt {
+				background: transparent url('whisper/shizuo.png') no-repeat center top;
+			}
+			
+			#murmurs dl.shizuo dd div.bubble p.body.middle:before, #murmurs dl.shizuo dd div.bubble p.body.top:before, #murmurs dl.shizuo dd div.bubble p.body.bottom:before {
+				border-color: transparent #292841;
+			}*/
+			
+			/*#murmurs dl.ciel dd div.bubble p.body {
+				border-color: #005826;
+			}
+			
+			#murmurs dl.ciel dt {
+				background: transparent url('whisper/ciel.png') no-repeat center top;
+			}
+			
+			#murmurs dl.ciel dd div.bubble p.body.middle:before, #murmurs dl.ciel dd div.bubble p.body.top:before, #murmurs dl.ciel dd div.bubble p.body.bottom:before {
+				border-color: transparent #005826;
+			}*/
+			
+			/*#murmurs dl.chii dd div.bubble p.body {
+				border-color: #ff98ab;
+			}
+			
+			#murmurs dl.chii dt {
+				background: transparent url('whisper/chii.png') no-repeat center top;
+			}
+			
+			#murmurs dl.chii dd div.bubble p.body.middle:before, #murmurs dl.chii dd div.bubble p.body.top:before, #murmurs dl.chii dd div.bubble p.body.bottom:before {
+				border-color: transparent #ff98ab;
+			}*/
+			
+			/*#murmurs dl.selty dd div.bubble p.body {
+				border-color: #deca67;
+			}
+			
+			#murmurs dl.selty dt {
+				background: transparent url('whisper/selty.png') no-repeat center top;
+			}
+			
+			#murmurs dl.selty dd div.bubble p.body.middle:before, #murmurs dl.selty dd div.bubble p.body.top:before, #murmurs dl.selty dd div.bubble p.body.bottom:before {
+				border-color: transparent #deca67;
+			}*/
+			
+			/*#murmurs dl.mika dd div.bubble p.body {
+				border-color: #a864a9;
+			}
+			
+			#murmurs dl.mika dt {
+				background: transparent url('whisper/mika.png') no-repeat center top;
+			}
+			
+			#murmurs dl.mika dd div.bubble p.body.middle:before, #murmurs dl.mika dd div.bubble p.body.top:before, #murmurs dl.mika dd div.bubble p.body.bottom:before {
+				border-color: transparent #a864a9;
+			}*/
+			
+			/*#murmurs dl.shingen dd div.bubble p.body {
+				border-color: #673b15;
+			}
+			
+			#murmurs dl.shingen dt {
+				background: transparent url('whisper/shingen.png') no-repeat center top;
+			}
+			
+			#murmurs dl.shingen dd div.bubble p.body.middle:before, #murmurs dl.shingen dd div.bubble p.body.top:before, #murmurs dl.shingen dd div.bubble p.body.bottom:before {
+				border-color: transparent #673b15;
+			}*/
+			
+			/*#murmurs dl.hana dd div.bubble p.body {
+				border-color: #c67351;
+			}
+			
+			#murmurs dl.hana dt {
+				background: transparent url('whisper/hana.png') no-repeat center top;
+			}
+			
+			#murmurs dl.hana dd div.bubble p.body.middle:before, #murmurs dl.hana dd div.bubble p.body.top:before, #murmurs dl.hana dd div.bubble p.body.bottom:before {
+				border-color: transparent #c67351;
+			}*/
+			
+			/*#murmurs dl.bepo dd div.bubble p.body {
+				border-color: #ed862a;
+			}
+			
+			#murmurs dl.bepo dt {
+				background: transparent url('whisper/bepo.png') no-repeat center top;
+			}
+			
+			#murmurs dl.bepo dd div.bubble p.body.middle:before, #murmurs dl.bepo dd div.bubble p.body.top:before, #murmurs dl.bepo dd div.bubble p.body.bottom:before {
+				border-color: transparent #ed862a;
+			}*/
+			
+			/*#murmurs dl.law dd div.bubble p.body {
+				border-color: #c69761;
+			}
+			
+			#murmurs dl.law dt {
+				background: transparent url('whisper/law.png') no-repeat center top;
+			}
+			
+			#murmurs dl.law dd div.bubble p.body.middle:before, #murmurs dl.law dd div.bubble p.body.top:before, #murmurs dl.law dd div.bubble p.body.bottom:before {
+				border-color: transparent #c69761;
+			}*/
+			
+			/*#murmurs dl.nozomu dd div.bubble p.body {
+				border-color: #8b9066;
+			}
+			
+			#murmurs dl.nozomu dt {
+				background: transparent url('whisper/nozomu.png') no-repeat center top;
+			}
+			
+			#murmurs dl.nozomu dd div.bubble p.body.middle:before, #murmurs dl.nozomu dd div.bubble p.body.top:before, #murmurs dl.nozomu dd div.bubble p.body.bottom:before {
+				border-color: transparent #8b9066;
+			}*/
+			
+			/*#murmurs dl.tero dd div.bubble p.body {
+				border-color: #d3da57;
+			}
+			
+			#murmurs dl.tero dt {
+				background: transparent url('whisper/tero.png') no-repeat center top;
+			}
+			
+			#murmurs dl.tero dd div.bubble p.body.middle:before, #murmurs dl.tero dd div.bubble p.body.top:before, #murmurs dl.tero dd div.bubble p.body.bottom:before {
+				border-color: transparent #d3da57;
+			}*/
+			
+			/*#murmurs dl.meme dd div.bubble p.body {
+				border-color: #df2f48;
+			}
+			
+			#murmurs dl.meme dt {
+				background: transparent url('whisper/meme.png') no-repeat center top;
+			}
+			
+			#murmurs dl.meme dd div.bubble p.body.middle:before, #murmurs dl.meme dd div.bubble p.body.top:before, #murmurs dl.meme dd div.bubble p.body.bottom:before {
+				border-color: transparent #df2f48;
+			}*/
+			
+			/*#murmurs dl.hoshi dd div.bubble p.body {
+				border-color: #fde832;
+			}
+			
+			#murmurs dl.hoshi dt {
+				background: transparent url('whisper/hoshi.png') no-repeat center top;
+			}
+			
+			#murmurs dl.hoshi dd div.bubble p.body.middle:before, #murmurs dl.hoshi dd div.bubble p.body.top:before, #murmurs dl.hoshi dd div.bubble p.body.bottom:before {
+				border-color: transparent #fde832;
+			}*/
+			
+			/*#murmurs dl.soncho dd div.bubble p.body {
+				border-color: #7ab35f;
+			}
+			
+			#murmurs dl.soncho dt {
+				background: transparent url('whisper/soncho.png') no-repeat center top;
+			}
+			
+			#murmurs dl.soncho dd div.bubble p.body.middle:before, #murmurs dl.soncho dd div.bubble p.body.top:before, #murmurs dl.soncho dd div.bubble p.body.bottom:before {
+				border-color: transparent #7ab35f;
+			}*/
+			
+			/*#murmurs dl.dango dd div.bubble p.body {
+				border-color: #f1c6a9;
+			}
+			
+			#murmurs dl.dango dt {
+				background: transparent url('whisper/dango.png') no-repeat center top;
+			}
+			
+			#murmurs dl.dango dd div.bubble p.body.middle:before, #murmurs dl.dango dd div.bubble p.body.top:before, #murmurs dl.dango dd div.bubble p.body.bottom:before {
+				border-color: transparent #f1c6a9;
+			}*/
+
+#login {
+	margin: 0 auto;
+	min-height: 100px;
+}
+
+#login .language {
+	text-align: right;
+	margin: 0 0 5px;
+}
+
+#login .logo {
+	text-align: center;
+	width: 285px;
+}
+
+	#login .logo img {
+		width: 80%;
+	}
+
+#login .field {
+	text-align: center;
+	width: 280px;
+}
+
+	#login .field .textbox {
+		width: 240px;
+		display: block;
+		font-size: 20px;
+		letter-spacing: 1px;
+		text-align: center;
+		padding: 5px;
+		border: 1px solid #cccccc;
+		margin: 0 auto 20px auto;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+	}
+
+	#login .field .button {
+		position: relative;
+		color: #d3d3d3;
+		width: 150px;
+		text-shadow: 0 1px 3px rgba(255, 255, 255, 0.6);
+		border: 2px solid #ffffff;
+		appearance: none;
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		padding: 2px 20px;
+		background: #363636;
+		box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+		-moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+		-webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+		cursor: pointer;
+	}
+
+	/*#login .field .button:active {
+		top: 1px;
+	}*/
+
+#login .insider {
+	text-align: center;
+	width: 280px;
+	margin: 20px 0 15px;
+	border-top: solid #dddddd 1px;
+	padding: 10px 0;
+}
+
+	#login .insider .rooms {
+		font-size: 13px;
+		margin-top: 8px;
+		max-height: 240px;
+		overflow: hidden;
+	}
+
+#login .footer {
+	text-align: center;
+	margin: 40px 0 20px 0;
+	clear: both;
+	color: #8a8a8a;
+	font-size: 13px;
+}
+
+#login .languageLinks {
+	clear: both;
+	text-align: center;
+	font-size: 10px;
+	margin: 10px 0;
+}
+
+#login .copyright {
+	text-align: center;
+	margin: 30px 0 20px 0;
+	clear: both;
+	color: #8a8a8a;
+	font-size: 10px;
+}
+
+/*.notice {
+	text-align: left;
+	font-size: 11px;
+}*/
+
+#login img#splash {
+	float: right;
+	width: 35%;
+	/*margin: 20px 8%;*/
+	margin: 20px 45px;
+}
+
+ul.icons {
+	list-style-type: none;
+	float: right;
+	width: 50%;
+}
+
+	ul.icons li {
+		display: block;
+		float: left;
+		width: 60px;
+		margin: 1px 5px 5px 5px;
+		text-align: center;
+	}
+
+		ul.icons li label img {
+			width: 58px;
+			height: 58px;
+			opacity: 0.6;
+			filter: alpha(opacity=60);
+		}
+
+		ul.icons li label img:hover {
+			opacity: 1.0;
+			filter: alpha(opacity=100);
+		}
+
+		ul.icons li label input {
+			display: none;
+		}
+
+#create_room {
+	float: right;
+}
+
+ul#profile {
+	float: left;
+	width: 100%; /* 612px */
+	list-style-type: none;
+	background: #404040;
+	border-width: 0 0 1px;
+	border-style: dotted;
+	border-color: #ffffff;
+}
+
+	ul#profile li {
+		display: block;
+		float: left;
+		vertical-align: middle;
+		height: 60px;
+		margin: 15px 0;
+	}
+
+	ul#profile li.icon {
+		width: 60px;
+		margin-left: 15px;
+	}
+
+	ul#profile li.name {
+		min-width: 50px;
+		color: #fff;
+		font-size: 18px;
+		text-align: left;
+		line-height: 60px;
+		padding: 0 15px
+	}
+
+	ul#profile li.admin {
+		line-height: 60px;
+		font-size: 13px;
+	}
+
+	ul#profile li.logout {
+		float: right;
+		line-height: 60px;
+		margin-right: 15px;
+	}
+
+	ul#profile a:hover, ul#profile a:focus {
+		text-decoration: none;
+		text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+	}
+
+ul.rooms {
+	list-style-type: none;
+	clear: both;
+	border-bottom: solid #ddd 1px;
+	font-size: 14px;
+}
+
+	ul.rooms li {
+		list-style-type: none;
+		display: block;
+		text-align: center;
+		float: left;
+		padding: 8px 0;
+	}
+
+	ul.rooms li.name {
+		width: 23%;
+		text-align: left;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		margin-right: 10px;
+	}
+
+		ul.rooms li.name span.key {
+			vertical-align: middle;
+			margin: 0 2px 0 0;
+		}
+
+	ul.rooms li.users {
+		width: 40%;
+	}
+
+		ul.rooms li.users img {
+			opacity: 0.8;
+			filter: alpha(opacity=80);
+			width: 1em;
+			margin-right: 3px;
+		}
+
+		ul.rooms li.users .name {
+			width: 33%;
+			text-align: left;
+			float: left;
+			font-size: 12px;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+
+	ul.rooms li.member {
+		width: 15%;
+	}
+
+	ul.rooms li.login {
+		width: 20%;
+	}
+
+		ul.rooms li.login .subcontrol {
+			margin-top: 8px;
+		}
+
+ul#members, ul#invite {
+	list-style-type: none;
+	text-align: left;
+	clear: both;
+	margin-bottom: 2px;
+	/*padding-right: 40px;*/
+	zoom: 1;
+}
+
+ul#invite {
+	margin-bottom: 3px;
+}
+
+	ul#members li, ul#invite li {
+		display: inline;
+	}
+
+	ul#invite li span {
+		/*margin-bottom: 3px;*/
+		font-size: 13px;
+	}
+
+	ul#invite li .textbox {
+		display: block;
+		/*margin-bottom: 3px;*/
+		border: 1px solid #838383;
+		width: 96%;
+	}
+
+	ul#invite li a img {
+		vertical-align: bottom;
+		border-style: none;
+	}
+
+#talks_box  {
+	/*position: absolute;*/
+	/*width: 620px;*/
+	overflow-x: auto;
+}
+
+#murmurs_box {
+	/*width: 620px;*/
+	position: relative;
+	top: 140px;
+	/*margin: 0 auto;*/
+	overflow-y: auto;
+	overflow-x: auto;
+	height: 71%;
+}
+
+.error {
+	color: #d00000;
+	text-align: center;
+	font-size: 15px;
+}
+
+div.message_length {
+	position: absolute;
+	right: 0;
+	bottom: 5px;
+	margin: 2px 2px 0;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+div.whisper_message_box .message_length {
+	color: #ffffff;
+}
+
+#about p {
+	font-size: 14px;
+	text-indent: 20px;
+	text-align: justify;
+	margin: 8px 0;
+	text-shadow: 0 2px 3px rgba(125, 125, 125, 0.8);
+}
+
+#about ul {
+	width: 70%;
+	margin: 0 auto;
+	padding-left: 25px;
+	font-size: 14px;
+	text-shadow: 0 2px 3px rgba(125, 125, 125, 0.8);
+}
+
+#about .work {
+	margin-left: 10px;
+	font-size: 12px;
+}
+
+#readme h4 {
+	text-align: left;
+	margin: 2px 0;
+	font-size: 15px;
+}
+
+#readme p {
+	font-size: 14px;
+	text-indent: 20px;
+	text-align: justify;
+	margin: 2px 0 5px 0;
+	text-shadow: 0 2px 3px rgba(125, 125, 125, 0.8);
+}
+
+#readme ul {
+	width: 90%;
+	margin: 2px auto;
+	padding-left: 25px;
+	font-size: 14px;
+	text-shadow: 0 2px 3px rgba(125, 125, 125, 0.8);
+}
+
+	#readme ul li {
+		margin-bottom: 5px;
+	}
+
+#readme .answer {
+	display: block;
+	font-size: 13px;
+	text-indent: 25px;
+	text-align: justify;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+	height: 10px;
+	background-color: #ccc;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 5px;
+	background: #fff;
+	margin-right: 15px;
+}

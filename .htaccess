@@ -1,0 +1,46 @@
+# Avoid Viewing Of HT Files
+<Files ~ "^\.ht">
+order deny,allow
+deny from all
+satisfy all
+</Files>
+
+# Index And Rewrite Rules 
+Options -Indexes
+IndexIgnore *
+Options +FollowSymlinks
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z0-9_]+)/*$ index.php?controller=$1&%{QUERY_STRING} [L]
+RewriteRule ^([a-z0-9_]+)/([a-z0-9_]+)/*$ index.php?controller=$1&action=$2&%{QUERY_STRING} [L]
+
+RedirectMatch 404 /\.git
+
+# Custom Error Pages
+ErrorDocument 400 /index.php?controller=error&action=400
+ErrorDocument 401 /index.php?controller=error&action=401
+ErrorDocument 403 /index.php?controller=error&action=403
+ErrorDocument 404 /index.php?controller=error&action=404
+ErrorDocument 500 /index.php?controller=error&action=500
+
+# Disable Auto Prepend and Append
+# php_value auto_append_file none
+# php_value auto_prepend_file none
+
+# Page Caching
+<IfModule mod_headers.c>
+# 1 YEAR
+<FilesMatch "\.(ico|pdf)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+# 1 MONTH
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|css|js)$">
+Header set Cache-Control "max-age=2689743, public"
+</FilesMatch>
+# 2 DAYS
+<FilesMatch "\.(xml|txt|html|php)$">
+Header set Cache-Control "max-age=172800, proxy-revalidate"
+</FilesMatch>
+</IfModule>

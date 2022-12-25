@@ -1,0 +1,19 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+# We do not code, some hands did this...automagically
+
+# TEAM
+
+    @schnabear
+
+# THANKS
+
+    @bigbro
+    @ikeda
+
+# TECHNOLOGY COLOPHON
+
+    XHTML, CSS3, jQuery, DLC, SoundManager2
+
+    Site URL: http://mushoku.tk/
+    Software: Notepad++, VIM
