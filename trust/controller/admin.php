@@ -88,6 +88,11 @@ class Dura_Controller_Admin extends Dura_Abstract_Controller
 			}
 		}
 
+		if ( $this->_usesDefaultSecrets($name, $pass) )
+		{
+			throw new Exception(t("Administration is locked because setting.php still uses the default admin account or secret key. Set a unique admin name/password and change DURA_SECURE_KEY, then try again."));
+		}
+
 		$user =& Dura_Class_User::getInstance();
 		$user->login($name, 'admin', '', DURA_LANGUAGE, true);
 
@@ -101,5 +106,26 @@ class Dura_Controller_Admin extends Dura_Abstract_Controller
 		$this->output['error'] = $this->error;
 		$this->output['token'] = Dura_Class_Ticket::issue();
 		$this->_view();
+	}
+
+	/**
+	 * Refuse to grant administrator rights while the installation still ships
+	 * with the well-known defaults from setting.dist.php. With these in place
+	 * anyone can log in as ROOT/TOOR, and the predictable DURA_SECURE_KEY lets
+	 * user ids and tripcodes be forged offline.
+	 */
+	protected function _usesDefaultSecrets($name, $pass)
+	{
+		if ( $name === 'ROOT' && $pass === 'TOOR' )
+		{
+			return true;
+		}
+
+		if ( defined('DURA_SECURE_KEY') && DURA_SECURE_KEY === 'FOOBAR' )
+		{
+			return true;
+		}
+
+		return false;
 	}
 }

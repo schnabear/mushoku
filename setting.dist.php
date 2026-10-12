@@ -2,6 +2,10 @@
 
 /**
  * Admin
+ *
+ * SECURITY: Change these from the defaults below before going live. While the
+ * account is still ROOT/TOOR (or DURA_SECURE_KEY is still 'FOOBAR'), admin
+ * login is locked and administrator rights will NOT be granted.
  */
 // define('DURA_ADMIN_NAME', 'ROOT');
 // define('DURA_ADMIN_PASS', 'TOOR');
@@ -79,8 +83,25 @@ define('DURA_SESSION_NAME', 'DURASESS');
 
 /**
  * Secure key
+ *
+ * SECURITY: Set this to a long, unique, random string. It is used to derive
+ * user ids and secure tripcodes; leaving the default 'FOOBAR' makes those
+ * values forgeable and keeps admin login locked.
  */
 define('DURA_SECURE_KEY', 'FOOBAR');
+
+/**
+ * Trusted reverse proxies
+ *
+ * IP addresses of the reverse proxies / load balancers that sit directly in
+ * front of this app (e.g. your Nginx/HAProxy, or Cloudflare egress IPs). Only
+ * when a request arrives directly from one of these addresses are forwarding
+ * headers (X-Forwarded-For, CF-Connecting-IP, ...) trusted to resolve the real
+ * client IP. Leave empty when the app is exposed directly to clients: trusting
+ * these headers from arbitrary clients allows ban-evasion and identity
+ * spoofing, because user ids and bans are keyed on the client IP.
+ */
+define('DURA_TRUSTED_PROXIES', array());
 
 /**
  * reCAPTCHA key

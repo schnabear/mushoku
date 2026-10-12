@@ -12,6 +12,7 @@ return array(
 	"Member should be more than {1}." => "人数は{1}人以上にしてください。",
 	"Member should be less than {1}." => "人数は{1}人以下にしてください。",
 	"Cannot create new room anymore." => "これ以上部屋を増やすことはできません。",
+	"Administration is locked because setting.php still uses the default admin account or secret key. Set a unique admin name/password and change DURA_SECURE_KEY, then try again." => "既定の管理者アカウントまたは秘密鍵が setting.php に残っているため、管理機能はロックされています。管理者名・パスワードを固有の値に設定し、DURA_SECURE_KEY を変更してから、再度お試しください。",
 	"Please input password." => "Please input password.",
 	"Password provided is incorrect." => "Password provided is incorrect.",
 	"CAPTCHA challenge failed." => "CAPTCHA challenge failed.",

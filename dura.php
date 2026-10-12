@@ -438,36 +438,64 @@ class Dura
 
 	public static function fetchIP()
 	{
-		if ( isset($_SERVER["HTTP_X_FORWARDED_FOR"]) )
-		{
-			foreach ( explode(",", $_SERVER["HTTP_X_FORWARDED_FOR"]) as $ip )
-			{
-				$ip = trim($ip);
+		$remoteAddr = isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '';
 
-				if ( self::validIP($ip) )
-				{
-					return $ip;
-				}
+		$trustedProxies = defined('DURA_TRUSTED_PROXIES') ? DURA_TRUSTED_PROXIES : array();
+		if ( !is_array($trustedProxies) )
+		{
+			$trustedProxies = array();
+		}
+
+		// Client-supplied forwarding headers (X-Forwarded-For, CF-Connecting-IP,
+		// etc.) can be set to any value by the remote client, so they are only
+		// trustworthy when the direct connection (REMOTE_ADDR) comes from a
+		// reverse proxy we explicitly trust via DURA_TRUSTED_PROXIES. For a
+		// direct client connection we ignore them and use REMOTE_ADDR, otherwise
+		// an attacker could spoof their IP to evade bans (hash of IP) or forge
+		// another user's identity (hash of name + IP).
+		if ( $remoteAddr === '' || !in_array($remoteAddr, $trustedProxies, true) )
+		{
+			return $remoteAddr;
+		}
+
+		// Behind a trusted proxy: walk X-Forwarded-For from right to left,
+		// skipping addresses that belong to our own trusted proxies, and return
+		// the first remaining address (the real client as seen by our edge).
+		if ( !empty($_SERVER['HTTP_X_FORWARDED_FOR']) )
+		{
+			$parts = array_map('trim', explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+
+			for ( $i = count($parts) - 1; $i >= 0; $i-- )
+			{
+				$ip = $parts[$i];
+
+				if ( filter_var($ip, FILTER_VALIDATE_IP) === false ) continue;
+				if ( in_array($ip, $trustedProxies, true) ) continue;
+
+				return $ip;
 			}
 		}
 
+		// Fall back to single-value proxy headers, still only trusted because
+		// the direct peer is a trusted proxy.
 		$keys = array(
 			'HTTP_CLIENT_IP',
 			'HTTP_CF_CONNECTING_IP',
 			'HTTP_X_FORWARDED',
 			'HTTP_X_CLUSTER_CLIENT_IP',
 			'HTTP_FORWARDED_FOR',
-			'HTTP_FORWARDED',
-			'REMOTE_ADDR'
+			'HTTP_FORWARDED'
 		);
 
-		foreach ($keys as $key)
+		foreach ( $keys as $key )
 		{
-			if ( isset($_SERVER[$key]) && self::validIP($_SERVER[$key]) )
+			if ( !empty($_SERVER[$key]) && filter_var($_SERVER[$key], FILTER_VALIDATE_IP) !== false )
 			{
 				return $_SERVER[$key];
 			}
 		}
+
+		return $remoteAddr;
 	}
 
 	public static function compressOutput()

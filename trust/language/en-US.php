@@ -12,6 +12,7 @@ return array(
 	"Member should be more than {1}." => "User capacity must be more than {1}.",
 	"Member should be less than {1}." => "User capacity must be less than {1}.",
 	"Cannot create new room anymore." => "You can't create a new room anymore.",
+	"Administration is locked because setting.php still uses the default admin account or secret key. Set a unique admin name/password and change DURA_SECURE_KEY, then try again." => "Administration is locked because setting.php still uses the default admin account or secret key. Set a unique admin name/password and change DURA_SECURE_KEY, then try again.",
 	"Please input password." => "Please input password.",
 	"Password provided is incorrect." => "Password provided is incorrect.",
 	"CAPTCHA challenge failed." => "CAPTCHA challenge failed.",
